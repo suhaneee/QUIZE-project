@@ -1,0 +1,119 @@
+@font-face {
+  font-family: "yg-jalnan";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "yg-jalnan";
+}
+header {
+  width: 100%;
+  height: 100%;
+  margin-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid black;
+}
+.logo {
+  font-size: 30px;
+  margin-left: 50px;
+  color: rgb(0, 162, 255);
+}
+
+.container {
+  border: 12px solid rgb(255, 196, 32);
+  border-radius: 10px;
+  width: 850px;
+  height: 800px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  align-self: center;
+  text-align: center;
+  position: relative;
+}
+.titlewrap {
+  padding-top: 30px;
+}
+.container p {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  translate: -50%;
+  width: 100%;
+  color: black;
+  font-size: 40px;
+  font-weight: 100;
+}
+
+footer {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-top: 1px solid black;
+}
+.user_img {
+  position: absolute;
+  top: -25px;
+  left: 20px;
+  margin: 40px auto;
+  background-color: #fff;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 7px solid black;
+  box-shadow: 20px 10px 20px 0px rgb(36, 36, 36, 0.2);
+}
+.user_img img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+}
+a {
+  text-decoration-line: none;
+}
+.write {
+  position: absolute;
+  flex-direction: column;
+  display: flex;
+  top: 42%;
+  left: 50%;
+  translate: -50%;
+}
+.answer {
+  background-color: rgb(2, 122, 192);
+  color: #fff;
+  font-size: 30px;
+  border-radius: 10px;
+  margin: 20px;
+  width: 400px;
+  height: 60px;
+  cursor: pointer;
+}
+.nextAnswer{
+    position: absolute;
+    bottom: 20px;
+    right: 50px;
+}
+.backAnswer{
+  position: absolute;
+    bottom: 20px;
+    left: 50px;
+    transform:rotate(90deg);
+
+    -moz-transform: scaleX(-1); 
+ 
+      -o-transform: scaleX(-1); 
+ 
+ -webkit-transform: scaleX(-1); 
+ 
+         transform: scaleX(-1);   
+ 
+        filter: FlipH;
+ 
+   -ms-filter: "FlipH";
+}

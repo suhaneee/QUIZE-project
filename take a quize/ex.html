@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="quiz"> </div>
+     <button id="submit"> Submit </button><button id="submit" style="border:1px solid tomato; padding:5px; border-radius:5px; color:tomato;"> 제출하기 </button></p> //제출 버튼::인라인 형태의 CSS넣기
+<div id="result"> </div>
+
+<script>
+const quizDisplay = document.getElementById('quiz');
+const submitBtn = document.getElementById('submit');
+const resultDisplay = document.getElementById('result');
+
+
+//출제자, 발표자[Display] 생성
+function buildQuiz(){ }
+function showResult(){ }
+
+
+    buildQuiz(); //퀴즈 출제지시!
+
+
+submitBtn.addEventListener('click',showResult);   //사용자 '퀴즈시작' 이벤트
+const quizData = [
+
+     {
+         question : '웹개발에 주로 사용되는 프론트언어는?',
+         answers : {
+            a : "일본어",
+            b : "다랑어",
+            c : "자바스크립트"
+         },
+        correct : 'c'
+     },
+     {
+         question : '웹 디자인에 사용되는 언어는?',
+         answers : {
+             a : '미싱',
+             b : 'css',
+             c : '돈까s'
+         },
+        correct : 'b'
+     },
+     {
+           question : '블로그 형태로 웹사이트를 쉽게 개발할 수 있는 방식을 무엇이라고 하는가?',
+           answers : {
+                 a : 'CMS',
+                 b : 'WAX',
+                 c : 'KISWISS'
+           },
+        correct : 'a'
+     }
+]
+function showResult(){
+
+//'answer'이름의 클래스를 배열로 저장하기
+ const answerDisplays = quizDisplay.querySelectorAll('.answer');  
+ let numCorrect = 0; //퀴즈 정답률 기록
+ 
+ 
+
+ //답안 검증하기
+ quizData.forEach( (currentQuestion, questionNum)=>{   
+
+
+    const answerDisplay = answerDisplays[questionNum]; //answerDisplays배열을 index별로 불러오기
+    const selector = `input[name=question${questionNum}]:checked`; //input태그의 속성값 지정하기
+    const userAnswer = (answerDisplay.querySelector(selector) || {}).value; //input check값 저장
+
+
+                if(userAnswer === currentQuestion.correct){  //user가 선택한 값과 정답 검증
+                        numCorrect++;
+                        answerDisplays[questionNum].style.color = 'lightgreen';
+                }else{
+                        answerDisplays[questionNum].style.color = 'red';
+                }
+                
+   });
+   
+   
+         //resultDisplay DOM에 결과값 삽입하기
+          resultDisplay.innerHTML = `${numCorrect} out of ${quizData.length}`; 
+   
+   
+}
+</script>
+</body>
+</html>
