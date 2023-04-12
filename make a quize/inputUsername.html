@@ -25,5 +25,23 @@
       </div>
     </main>
     <footer>Info</footer>
+
+    <script> 
+    let record_arr = [];
+
+      async function loadData() {
+        try {
+          const response = await fetch("./data.json/data.json");
+          const data = await response.json();
+          record_arr = data;
+          console.log(record_arr);
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        } //수정한 부분 이해하고 넘어가기 //설명할때 용어 정확히! //모듈화
+       
+      }
+      loadData(); 
+      </script>
 </body>
 </html>
