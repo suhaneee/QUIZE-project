@@ -3,7 +3,7 @@
     "question" : "나는...몇째 일까?",
     "answers": {
     "a": "듬직한 첫째",
-    "b": "그냥 둘째",
+    "b": "의젓한 둘째",
     "c": "세상순둥한 막내",
     "d":"싸가지 외동"
     },
@@ -17,7 +17,7 @@
     "c": "가을",
     "d":"겨울"
     },
-    "correct": "b"
+    "correct": ""
     },
     {
     "question": "여가시간때 나는 무엇을 할까?",
@@ -27,7 +27,7 @@
     "c": "운동",
     "d":"독서"
     },
-    "correct": "a"
+    "correct": ""
     },
     {
         "question" : "기회가 주어진다면 나는 어떤 초능력을 선택할까?",
@@ -37,7 +37,7 @@
         "c": "생각읽기",
         "d":"불멸"
         },
-        "correct": "c"
+        "correct": ""
         },
         {
         "question" : "샤워시 내가 가장 먼저 씻는 곳은?",
@@ -47,17 +47,17 @@
         "c": "세수",
         "d":"양치"
         },
-        "correct": "b"
+        "correct": ""
         },
         {
         "question": "내가 좋아하는 향은?",
         "answers": {
-        "a": "플로랄(자스민,라벤더,장미...)",
-        "b": "우디woody(나무,흙내음,절)향",
+        "a": "꽃향(자스민,라벤더,장미...)",
+        "b": "우디woody향(나무,흙내음,절)",
         "c": "따듯하고 달달한 향(바닐라,머스크)",
         "d":"가볍고 상쾌한 향(시트러스)"
         },
-        "correct": "a"
+        "correct": ""
         },
         {
             "question" : "제일 별로인 베라메뉴?",
@@ -67,28 +67,41 @@
             "c": "체리쥬빌레",
             "d":"레인보우샤베트"
             },
-            "correct": "c"
+            "correct": ""
             },
             {
             "question" : "가장 좋아하는 시간대?",
             "answers": {
             "a" : "이른아침",
             "b": "나른한 오후",
-            "c": "저녁 해 질 떄",
+            "c": "저녁 해 질 때",
             "d":"새벽감성"
             },
-            "correct": "b"
+            "correct": ""
             },
             {
-            "question": "What is a method that can easily develop a website in the form of a blog called?",
+            "question": "내가 가장 즐겨가는 카페는?",
             "answers": {
-            "a": "CMS",
-            "b": "WAX",
-            "c": "KISWISS",
-            "d":"겨울"
+            "a": "스타벅스",
+            "b": "투썸플레이스",
+            "c": "이디야",
+            "d":"인스타 감성 카페"
             },
-            "correct": "a"
-            }
+            "correct": ""
+            },
+            {
+                "customquestion": "",
+                "customAnswers": {
+                "a": "",
+                "b": "",
+                "c": "",
+                "d":""
+                },
+                "correct": ""
+                },
+                {
+                    "username":""
+                }
     ]
     
     

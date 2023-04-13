@@ -19,15 +19,99 @@
           </div>
           <div class="title"><p id="questionTitle">나는...몇째 일까?</p></div>
           <div class="write">
-          <button class="answer" id="answer_01">첫째</button>
-          <button class="answer" id="answer_02">둘째</button>
-          <button class="answer" id="answer_03">막내</button>
-          <button class="answer" id="answer_04">외동</button>
+          <button class="answer" id="answer_01"></button>
+          <button class="answer" id="answer_02"></button>
+          <button class="answer" id="answer_03"></button>
+          <button class="answer" id="answer_04"></button>
         </div>
-         <div class="nextAnswer"><a href="./customAnswer.html"><img src="./img/icons8-right-arrow-60.png" alt=""></a></div> 
+         <div class="nextAnswer"><img src="./img/icons8-right-arrow-60.png" alt=""></div> 
         </div>
       </div>
     </main>
     <footer>Info</footer>
+
+    <script>
+       let record_arr = [];
+
+async function loadData() {
+  try {
+    const response = await fetch("./data.json/data.json");
+    const data = await response.json();
+    record_arr = data;
+    console.log(record_arr);
+    document.getElementById("questionTitle").innerHTML = record_arr[0].question;
+    document.getElementById("answer_01").innerHTML = record_arr[0].answers.a;
+    document.getElementById("answer_02").innerHTML = record_arr[0].answers.b;
+    document.getElementById("answer_03").innerHTML = record_arr[0].answers.c;
+    document.getElementById("answer_04").innerHTML = record_arr[0].answers.d;
+  } catch (error) {
+    console.log(error);
+  } //수정한 부분 이해하고 넘어가기 //설명할때 용어 정확히! //모듈화
+}
+const answerButtons = document.querySelectorAll('.answer');
+answerButtons.forEach((button) => {
+  button.addEventListener('click', function() {
+    // remove yellow background from all answer buttons
+    answerButtons.forEach((button) => {
+      button.style.backgroundColor = '';
+    });
+    
+    // change the background color of the selected button to yellow
+    this.style.backgroundColor = 'yellow';
+
+    
+  
+  });
+});
+
+
+let currentIndex = 0; // initialize the counter variable
+document.querySelector('.nextAnswer').addEventListener('click', function() {
+  currentIndex++; // increment the counter
+  if (currentIndex > 8)  {
+    // save the correct answer value
+    const answerButtons = document.querySelectorAll('.answer');
+    answerButtons.forEach((button) => {
+      if (button.style.backgroundColor === 'yellow') {
+        record_arr[8].correct = button.textContent;
+        console.log(record_arr[8]);
+      }
+    });
+
+    // redirect to customAnswer.html
+    document.location.href = 'customAnswer.html';
+    return;
+  }
+
+  // save the correct answer value
+  const answerButtons = document.querySelectorAll('.answer');
+  answerButtons.forEach((button) => {
+    if (button.style.backgroundColor === 'yellow') {
+      record_arr[currentIndex -1].correct = button.textContent;
+      console.log(record_arr[currentIndex -1]);
+    }
+  });
+
+  // load the next question and reset the answer buttons
+  document.getElementById("questionTitle").innerHTML = record_arr[currentIndex].question;
+  document.getElementById("answer_01").innerHTML = record_arr[currentIndex].answers.a;
+  document.getElementById("answer_02").innerHTML = record_arr[currentIndex].answers.b;
+  document.getElementById("answer_03").innerHTML = record_arr[currentIndex].answers.c;
+  document.getElementById("answer_04").innerHTML = record_arr[currentIndex].answers.d;
+
+  answerButtons.forEach((button) => {
+    button.style.backgroundColor = '';
+    button.disabled = false;
+  });
+});
+
+
+
+
+loadData(); 
+
+
+    </script>
+    
 </body>
 </html>

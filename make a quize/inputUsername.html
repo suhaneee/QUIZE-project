@@ -19,7 +19,7 @@
           </div>
           <p>당신의 이름을 입력해주세요(ex:문상훈)</p>
           <input type="text" name="" id="inputname" placeholder="👉이름을 입력해주세요.">
-          <button class="nextpage" onclick="location.href='./writeAnswer.html'">확인</button>
+          <button class="nextpage" onclick="location.href='writeAnswer.html'">확인</button>
           
         </div>
       </div>
@@ -29,19 +29,57 @@
     <script> 
     let record_arr = [];
 
-      async function loadData() {
-        try {
-          const response = await fetch("./data.json/data.json");
-          const data = await response.json();
-          record_arr = data;
-          console.log(record_arr);
-          console.log(data);
-        } catch (error) {
-          console.log(error);
-        } //수정한 부분 이해하고 넘어가기 //설명할때 용어 정확히! //모듈화
-       
-      }
-      loadData(); 
+async function loadData() {
+  try {
+    const response = await fetch("./data.json/data.json");
+    const data = await response.json();
+    record_arr = data;
+
+    const savedUsername = localStorage.getItem("username"); // 로컬 스토리지에서 username 값을 불러옴
+    if (savedUsername) {
+      document.getElementById("inputname").value = savedUsername; // input 필드에 기본값으로 설정
+      record_arr[10].username = savedUsername; // record_arr 배열에 저장
+    }
+
+    console.log(record_arr);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  } 
+}
+
+loadData();
+
+
+      // Define a function to save the username to the record_arr array
+// localStorage에서 저장된 사용자 이름을 불러옵니다 (있다면)
+const savedUsername = localStorage.getItem("username");
+if (savedUsername) {
+  document.getElementById("inputname").value = savedUsername;
+}
+
+// 사용자 이름을 record_arr 배열과 localStorage에 저장하는 함수를 정의합니다
+function saveUsername() {
+  const username = document.getElementById("inputname").value; // 입력 필드에서 값을 가져옵니다
+  record_arr[10].username = username; // 배열의 10번 인덱스에 값을 저장합니다
+  localStorage.setItem("username", username); // localStorage에 값을 저장합니다
+}
+
+// 버튼에 클릭 이벤트 리스너를 추가하여 사용자 이름을 저장하고 localStorage를 업데이트합니다
+const button = document.querySelector(".nextpage");
+button.addEventListener("click", function() {
+  const name = inputname.value;
+  if (name === "") {
+    console.log("이름을 입력해주세요");
+  } else {
+    saveUsername();
+    console.log(`입력된 이름: ${name}`);
+    console.log(record_arr);
+  }
+});
+
+
+
       </script>
 </body>
 </html>

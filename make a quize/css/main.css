@@ -58,6 +58,17 @@ footer{
    padding-bottom: 30px;
     border-top: 1px solid black;
 }
+.info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    font-size: 30px;
+}
+.info p{ 
+    color: gray;
+    margin-top: 20px;
+    font-size: 15px;
+}
 .user_img{ 
     margin: 40px auto;
     background-color: #fff;

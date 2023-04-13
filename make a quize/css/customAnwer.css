@@ -42,14 +42,15 @@
   }
   .inputqusetion {
     position: absolute;
-    top: 25%;
-    left: 64%;
+    top: 28%;
+    left: 52%;
     translate: -50%;
-    width: 65%;
+    width: 90%;
     color: black;
     font-size: 40px;
     font-weight: 900;
     border: none;
+    text-align: center;
   }
   
   footer {
@@ -61,19 +62,19 @@
 
   .user_img {
     position: absolute;
-    top: -25px;
+    top: -27px;
     left: 20px;
     margin: 40px auto;
     background-color: #fff;
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     border: 7px solid black;
     box-shadow: 20px 10px 20px 0px rgb(36, 36, 36, 0.2);
   }
   .user_img img {
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
   }
   a {
