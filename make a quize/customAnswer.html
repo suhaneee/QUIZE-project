@@ -20,10 +20,10 @@
           </div>
           <input class="inputqusetion" type="text" placeholder="나만의 질문 만들기!   👈 입력">
           <div class="write">
-          <input type="text" placeholder="..." id="answer_01">
-          <input type="text" placeholder="..." id="answer_02">
-          <input type="text" placeholder="..." id="answer_03">
-          <input type="text" placeholder="..." id="answer_04">
+          <input class="inputanswer" placeholder="..." id="answer_01">
+          <input class="inputanswer" placeholder="..." id="answer_02">
+          <input class="inputanswer" placeholder="..." id="answer_03">
+          <input class="inputanswer" placeholder="..." id="answer_04">
         </div>
          <div class="nextAnswer"><p>퀴즈 생성하러 가기</p><img src="./img/icons8-right-arrow-60.png" alt="" onclick="location.href='./createqusetion.html'"></div> 
         </div>
@@ -31,7 +31,50 @@
     </main>
     <footer>Info</footer>
     <script>
-      
+      let quize_arr = [];
+
+async function loadData() {
+  try {
+    const response = await fetch("./data.json/data.json");
+    const data = await response.json();
+    quize_arr = data;
+
+    const savedUsername = localStorage.getItem("username");
+    if (savedUsername) {
+      quize_arr[10].username = savedUsername;
+    }
+    const correctanswer = localStorage.getItem("correct");
+    if (correctanswer) {
+      quize_arr[0].correct = correctanswer;
+    }
+    console.log(quize_arr);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  } 
+}
+
+const inputField = document.querySelector(".inputqusetion");
+inputField.addEventListener("change", function () {
+  const title = inputField.value;
+  quize_arr[9].customquestion = title;
+  localStorage.setItem("customquestion", title);
+});
+
+
+const answerFields = document.querySelectorAll(".inputanswer");
+
+answerFields.forEach((field, index) => {
+  field.addEventListener("change", () => {
+    const answer = field.value;
+    quize_arr[9].customAnswers[index] = answer;
+    localStorage.setItem("customAnswers", JSON.stringify(quize_arr[9].customAnswers));
+  });
+});
+
+
+
+loadData();
     </script>
 </body>
 </html>

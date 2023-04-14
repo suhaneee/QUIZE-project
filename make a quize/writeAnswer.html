@@ -31,32 +31,36 @@
     <footer>Info</footer>
 
     <script>
-       let record_arr = [];
+       let quize_arr = [];
 
 async function loadData() {
   try {
     const response = await fetch("./data.json/data.json");
     const data = await response.json();
-    record_arr = data;
-    console.log(record_arr);
-    document.getElementById("questionTitle").innerHTML = record_arr[0].question;
-    document.getElementById("answer_01").innerHTML = record_arr[0].answers.a;
-    document.getElementById("answer_02").innerHTML = record_arr[0].answers.b;
-    document.getElementById("answer_03").innerHTML = record_arr[0].answers.c;
-    document.getElementById("answer_04").innerHTML = record_arr[0].answers.d;
+    quize_arr = data;
+    console.log(quize_arr);
+    const savedUsername = localStorage.getItem("username");
+    if (savedUsername) {
+      quize_arr[10].username = savedUsername; // quize_arr 배열에 저장
+    }
+    document.getElementById("questionTitle").innerHTML = quize_arr[0].question;
+    document.getElementById("answer_01").innerHTML = quize_arr[0].answers.a;
+    document.getElementById("answer_02").innerHTML = quize_arr[0].answers.b;
+    document.getElementById("answer_03").innerHTML = quize_arr[0].answers.c;
+    document.getElementById("answer_04").innerHTML = quize_arr[0].answers.d;
   } catch (error) {
     console.log(error);
-  } //수정한 부분 이해하고 넘어가기 //설명할때 용어 정확히! //모듈화
+  }
 }
 const answerButtons = document.querySelectorAll('.answer');
 answerButtons.forEach((button) => {
   button.addEventListener('click', function() {
-    // remove yellow background from all answer buttons
+    // 다른 버튼 클릭시 노란색으로 변경된 버튼 색깔 초기화
     answerButtons.forEach((button) => {
       button.style.backgroundColor = '';
     });
     
-    // change the background color of the selected button to yellow
+    // 선택한 버튼의 배경 색상을 노란색으로 변경
     this.style.backgroundColor = 'yellow';
 
     
@@ -65,39 +69,49 @@ answerButtons.forEach((button) => {
 });
 
 
-let currentIndex = 0; // initialize the counter variable
+let currentIndex = 0; //currentIndex
 document.querySelector('.nextAnswer').addEventListener('click', function() {
-  currentIndex++; // increment the counter
+  
+  currentIndex++; 
   if (currentIndex > 8)  {
-    // save the correct answer value
+    // [8]번째 클릭시 정답으로 버튼의 텍스트 값 저장
     const answerButtons = document.querySelectorAll('.answer');
     answerButtons.forEach((button) => {
       if (button.style.backgroundColor === 'yellow') {
-        record_arr[8].correct = button.textContent;
-        console.log(record_arr[8]);
+        quize_arr[8].correct = button.textContent;
+        console.log(quize_arr[8]);
       }
     });
-
-    // redirect to customAnswer.html
+    // customAnswer.html 페이지 이동
+    localStorage.setItem("quize_arr", JSON.stringify(quize_arr));
     document.location.href = 'customAnswer.html';
     return;
   }
 
-  // save the correct answer value
+  // 클릭시 correct에 버튼의 텍스트 값 저장
   const answerButtons = document.querySelectorAll('.answer');
+  let selectedButton = null; // 선택된 버튼
   answerButtons.forEach((button) => {
     if (button.style.backgroundColor === 'yellow') {
-      record_arr[currentIndex -1].correct = button.textContent;
-      console.log(record_arr[currentIndex -1]);
+      quize_arr[currentIndex -1].correct = button.textContent;
+      localStorage.setItem((currentIndex -1), quize_arr[currentIndex -1].correct);
+      selectedButton = button;
+      console.log(quize_arr[currentIndex -1]);
     }
   });
+ 
+  if (!selectedButton) { //선택된 버튼이 없으면 경고창 출력 
+    alert("정답을 선택해주세요.");
+    return;
+  }
+  
 
-  // load the next question and reset the answer buttons
-  document.getElementById("questionTitle").innerHTML = record_arr[currentIndex].question;
-  document.getElementById("answer_01").innerHTML = record_arr[currentIndex].answers.a;
-  document.getElementById("answer_02").innerHTML = record_arr[currentIndex].answers.b;
-  document.getElementById("answer_03").innerHTML = record_arr[currentIndex].answers.c;
-  document.getElementById("answer_04").innerHTML = record_arr[currentIndex].answers.d;
+  // 다음 질문을 로드하고 응답 버튼을 재설정
+  document.getElementById("questionTitle").innerHTML = quize_arr[currentIndex].question;
+  document.getElementById("answer_01").innerHTML = quize_arr[currentIndex].answers.a;
+  document.getElementById("answer_02").innerHTML = quize_arr[currentIndex].answers.b;
+  document.getElementById("answer_03").innerHTML = quize_arr[currentIndex].answers.c;
+  document.getElementById("answer_04").innerHTML = quize_arr[currentIndex].answers.d;
 
   answerButtons.forEach((button) => {
     button.style.backgroundColor = '';

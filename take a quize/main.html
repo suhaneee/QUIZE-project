@@ -15,15 +15,45 @@
         <div class="titlewrap">
           <p>릴레이 10문 10답</p>
           <h1>너,나 알아?</h1>
-          <h2>당신은 ____(이)의 대해 <br />얼마나 알고 계십니까?</h2>
+          <h2>당신은 <span class="username">____</span>(이)의 대해 <br />얼마나 알고 계십니까?</h2>
           <div class="user_img">
             <img src="./img/character.jpg" alt="">
           </div>
-          <button class="nextpage" onclick="location.href='./inputUsername.html'">📝 ___(이)의 퀴즈 풀러가기</button>
+          <button class="nextpage" onclick="location.href='./inputUsername.html'">📝<span class="username">____</span>(이)의 퀴즈 풀러가기</button>
           
         </div>
       </div>
     </main>
     <footer>Info</footer>
+    <script>
+     
+      let quize_arr = [];
+
+async function loadData() {
+  try {
+    const response = await fetch("/make a quize/data.json/data.json");
+    const data = await response.json();
+    quize_arr = data;
+
+    const savedUsername = localStorage.getItem("username");
+    if (savedUsername) {
+      quize_arr[10].username = savedUsername;
+    }
+
+    console.log(quize_arr);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  } 
+}
+loadData();
+
+const usernames = document.querySelectorAll(".username");
+const savedUsername = localStorage.getItem("username");
+usernames.forEach(username => {
+  username.textContent = savedUsername;
+});
+
+    </script>
   </body>
 </html>

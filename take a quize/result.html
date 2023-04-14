@@ -17,7 +17,7 @@
           <div class="user_img">
             <img src="./img/character.jpg" alt="">
           </div>
-          <p>당신과 ___(이)의 친밀도는 ? <br> ___% <br> <small> 친구들에게 공유해보세요</small></p>
+          <p>당신과&nbsp;<span class="username"></span>(이)의 친밀도는 ? <br> ___% <br> <small> 친구들에게 공유해보세요</small></p>
           
           <input type="text" name="" id="inputname" placeholder="👉링크 복사하기">
           
@@ -26,5 +26,33 @@
       </div>
     </main>
     <footer>Info</footer>
+    <script>
+       let quize_arr = [];
+
+async function loadData() {
+  try {
+    const response = await fetch("/make a quize/data.json/data.json");
+    const data = await response.json();
+    quize_arr = data;
+
+    const savedUsername = localStorage.getItem("username");
+    if (savedUsername) {
+      quize_arr[10].username = savedUsername;
+    }
+
+    console.log(quize_arr);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  } 
+}
+loadData();
+
+const usernames = document.querySelectorAll(".username");
+const savedUsername = localStorage.getItem("username");
+usernames.forEach(username => {
+  username.textContent = savedUsername;
+});
+    </script>
 </body>
 </html>

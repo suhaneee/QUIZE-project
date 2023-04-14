@@ -42,12 +42,12 @@ header {
 }
 .container p {
   position: absolute;
-  top: 20%;
+  top: 27%;
   left: 50%;
   translate: -50%;
   width: 100%;
   color: black;
-  font-size: 40px;
+  font-size: 38px;
   font-weight: 100;
 }
 
@@ -62,15 +62,15 @@ footer {
   left: 20px;
   margin: 40px auto;
   background-color: #fff;
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   border: 7px solid black;
   box-shadow: 20px 10px 20px 0px rgb(36, 36, 36, 0.2);
 }
 .user_img img {
-  width: 220px;
-  height: 220px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
 }
 a {
@@ -90,7 +90,7 @@ a {
   font-size: 30px;
   border-radius: 10px;
   margin: 20px;
-  width: 400px;
+  width: 520px;
   height: 60px;
   cursor: pointer;
 }
@@ -98,22 +98,4 @@ a {
     position: absolute;
     bottom: 20px;
     right: 50px;
-}
-.backAnswer{
-  position: absolute;
-    bottom: 20px;
-    left: 50px;
-    transform:rotate(90deg);
-
-    -moz-transform: scaleX(-1); 
- 
-      -o-transform: scaleX(-1); 
- 
- -webkit-transform: scaleX(-1); 
- 
-         transform: scaleX(-1);   
- 
-        filter: FlipH;
- 
-   -ms-filter: "FlipH";
 }
