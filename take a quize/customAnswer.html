@@ -25,9 +25,8 @@
           <div class="answer" type="text" placeholder="..." id="answer_03"></div>
           <div class="answer" type="text" placeholder="..." id="answer_04"></div>
           </div>
-         <div class="nextAnswer"><p>퀴즈 결과 확인하기</p><img src="./img/icons8-right-arrow-60.png" alt="" ></div> 
+         <div class="nextAnswer"><p>퀴즈 결과 확인하기</p><img src="./img/icons8-right-arrow-60.png" alt=""></div> 
          <div class="message"></div>
-
       </div>
       </div>
     </main>
@@ -91,6 +90,7 @@ let lastcorrect = 0;
 
 const nextAnswerButton = document.querySelector(".nextAnswer");
 nextAnswerButton.addEventListener("click", function() {
+  
   const selectedAnswer = document.querySelector(".answer[style='background-color: orange;']");
   if (selectedAnswer && selectedAnswer.textContent === quize_arr[9].correct) {
     lastcorrect++;
@@ -100,12 +100,12 @@ nextAnswerButton.addEventListener("click", function() {
     localStorage.setItem("lastcorrect", lastcorrect);
   }
   const message = document.querySelector(".message");
-  message.textContent = "📝체점 중입니다...";
+  message.style.display = "block";
+  message.textContent = "📝체점 중입니다.....잠시만 기다려주세요";
   setTimeout(() => {
     window.location.href = "result.html";
   }, 3000);
 });
-
 
 loadData();
     </script>

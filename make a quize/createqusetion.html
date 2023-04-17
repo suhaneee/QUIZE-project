@@ -19,7 +19,7 @@
           </div>
           <p>당신의 퀴즈가 생성되었습니다. <br> <small> 친구들에게 공유해보세요</small></p>
           
-          <input type="text" name="" id="inputname" placeholder="👉링크 복사하기" >
+          <input type="text" name="" id="inputname" class="copyLinkButton" placeholder="👉링크 복사하기">
           <button id="repalce" onclick="location.href='/take a quize/main.html'">바로가기</button>
           
           
@@ -27,5 +27,16 @@
       </div>
     </main>
     <footer>Info</footer>
+    <script>
+      const copyLinkButton = document.querySelector(".copyLinkButton");
+const linkToCopy = "http://127.0.0.1:5500/take%20a%20quize/main.html"; // 복사할 링크 지정
+
+copyLinkButton.addEventListener("click", () => {
+  navigator.clipboard.writeText(linkToCopy)
+    .then(() => console.log("Link copied successfully!"))
+    .catch((error) => console.error("Error copying link: ", error));
+});
+
+    </script>
 </body>
 </html>
