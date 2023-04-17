@@ -27,7 +27,7 @@
     <footer>Info</footer>
     <script>
      
-      let quize_arr = [];
+     let quize_arr = [];
 
 async function loadData() {
   try {
@@ -35,10 +35,25 @@ async function loadData() {
     const data = await response.json();
     quize_arr = data;
 
-    const savedUsername = localStorage.getItem("username");
+    const savedUsername = localStorage.getItem("username");//username 값 localStorage에서 가져오기
     if (savedUsername) {
       quize_arr[10].username = savedUsername;
     }
+    
+     for (let i = 0; i < 9; i++) {
+      const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
+      if (correctAnswer) {
+        quize_arr[i].correct = correctAnswer;
+      }
+    }
+    const customQuestion = localStorage.getItem("customquestion");
+const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
+const correct = localStorage.getItem("correct");
+
+if (customQuestion) quize_arr[9].customquestion = customQuestion;
+if (customAnswers) quize_arr[9].customAnswers = customAnswers;
+if (correct) quize_arr[9].correct = correct;
+
 
     console.log(quize_arr);
     console.log(data);

@@ -93,6 +93,8 @@ a {
   width: 520px;
   height: 60px;
   cursor: pointer;
+  font-weight: 300;
+  font-family: 'yg-jalnan';
 }
 .nextAnswer{
     position: absolute;

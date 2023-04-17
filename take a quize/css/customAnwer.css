@@ -88,7 +88,7 @@
     left: 50%;
     translate: -50%;
   }
-  .write input{
+  .write div{
     background-color: rgb(2, 122, 192);
     color: #fff;
     font-size: 30px;
@@ -98,11 +98,9 @@
     height: 60px;
     cursor: pointer;
     text-align: center;
+   
   }
-  .write > input::placeholder {
-    color: #e9e9e9;
-    
-  }
+  
   .nextAnswer{
     display: flex;
       position: absolute;
@@ -117,5 +115,18 @@ left: -75px;
   }
   .nextAnswer img{
     cursor: pointer;
+  }
+  .message{
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    translate: -50%;
+    font-size: 50px;
+    width: 500px;
+    height: 500px;
+    
+    
+    
+    
   }
  

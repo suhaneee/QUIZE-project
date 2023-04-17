@@ -43,6 +43,20 @@
           if (savedUsername) {
             quize_arr[10].username = savedUsername; // quize_arr 배열에 저장
           }
+          for (let i = 0; i < 9; i++) {
+      const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
+      if (correctAnswer) {
+        quize_arr[i].correct = correctAnswer;
+      }
+    }
+const customQuestion = localStorage.getItem("customquestion");
+const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
+const correct = localStorage.getItem("correct");
+
+if (customQuestion) quize_arr[9].customquestion = customQuestion;
+if (customAnswers) quize_arr[9].customAnswers = customAnswers;
+if (correct) quize_arr[9].correct = correct;
+
           document.getElementById("questionTitle").innerHTML = quize_arr[0].question;
           document.getElementById("answer_01").innerHTML = quize_arr[0].answers.a;
           document.getElementById("answer_02").innerHTML = quize_arr[0].answers.b;
@@ -52,17 +66,25 @@
           console.log(error);
         }
       }
-      let currentIndex = 0; //currentIndex
-document.querySelector('.nextAnswer').addEventListener('click', function() {
-  
-  currentIndex++; 
-  if (currentIndex > 8)  {
-   
-    
-    // customAnswer.html 페이지 이동
-    document.location.href = 'customAnswer.html';
-  }  
 
+let currentIndex = 0; //currentIndex
+const answerElements = document.querySelectorAll(".answer");
+
+document.querySelector('.nextAnswer').addEventListener('click', function() {
+  const selectedAnswerElement = document.querySelector(".answer[style='background-color: orange;']");
+  const selectedAnswer = selectedAnswerElement ? selectedAnswerElement.textContent : "";
+  if (selectedAnswer === quize_arr[currentIndex].correct) {
+    numCorrect++;
+  }
+  currentIndex++;
+  answerElements.forEach(answerElement => {
+    answerElement.style.backgroundColor = ""; // 배경색 초기화
+  });
+  if (currentIndex > 8) {
+    // customAnswer.html 페이지 이동
+    localStorage.setItem("numCorrect", numCorrect);
+    document.location.href = 'customAnswer.html';
+  }
   // 다음 질문을 로드하고 응답 버튼을 재설정
   document.getElementById("questionTitle").innerHTML = quize_arr[currentIndex].question;
   document.getElementById("answer_01").innerHTML = quize_arr[currentIndex].answers.a;
@@ -70,10 +92,21 @@ document.querySelector('.nextAnswer').addEventListener('click', function() {
   document.getElementById("answer_03").innerHTML = quize_arr[currentIndex].answers.c;
   document.getElementById("answer_04").innerHTML = quize_arr[currentIndex].answers.d;
 
-  
+ 
+});
+let numCorrect = 0;
+answerElements.forEach(answerElement => {
+  answerElement.addEventListener("click", function() {
+    // 배경 초기화 
+    answerElements.forEach(elem => {
+      elem.style.backgroundColor = "";
+    });
+    this.style.backgroundColor = "orange";
+  });
 });
 
-      loadData();
+
+loadData();
       
       
       

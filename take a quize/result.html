@@ -17,7 +17,7 @@
           <div class="user_img">
             <img src="./img/character.jpg" alt="">
           </div>
-          <p>당신과&nbsp;<span class="username"></span>(이)의 친밀도는 ? <br> ___% <br> <small> 친구들에게 공유해보세요</small></p>
+          <p>당신과&nbsp;<span class="username"></span>(이)의 친밀도는 ? <br> <span class="result"></span><br> <small> 친구들에게 공유해보세요</small></p>
           
           <input type="text" name="" id="inputname" placeholder="👉링크 복사하기">
           
@@ -39,7 +39,25 @@ async function loadData() {
     if (savedUsername) {
       quize_arr[10].username = savedUsername;
     }
+    for (let i = 0; i < 9; i++) {
+const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
+if (correctAnswer) {
+  quize_arr[i].correct = correctAnswer;
+}
+}
+const customQuestion = localStorage.getItem("customquestion");
+const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
+const correct = localStorage.getItem("correct");
+const numCorrect = localStorage.getItem("numCorrect");
+const lastcorrect = localStorage.getItem("lastcorrect");
+console.log(numCorrect);
+console.log(lastcorrect);
+if (customQuestion) quize_arr[9].customquestion = customQuestion;
+if (customAnswers) quize_arr[9].customAnswers = customAnswers;
+if (correct) quize_arr[9].correct = correct;
 
+const result = document.querySelector(".result")
+result.innerHTML = parseInt(numCorrect) + parseInt(lastcorrect) +"0%❤️";
     console.log(quize_arr);
     console.log(data);
   } catch (error) {

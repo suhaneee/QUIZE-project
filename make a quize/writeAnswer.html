@@ -79,7 +79,7 @@ document.querySelector('.nextAnswer').addEventListener('click', function() {
     answerButtons.forEach((button) => {
       if (button.style.backgroundColor === 'yellow') {
         quize_arr[8].correct = button.textContent;
-        console.log(quize_arr[8]);
+        localStorage.setItem((currentIndex -1), quize_arr[8].correct);
       }
     });
     // customAnswer.html 페이지 이동

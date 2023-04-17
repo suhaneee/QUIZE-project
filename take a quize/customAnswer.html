@@ -18,18 +18,96 @@
           <div class="user_img">
             <img src="./img/character.jpg" alt="">
           </div>
-          <input class="inputqusetion" type="text" placeholder="나만의 질문 만들기!   👈 입력">
+          <div class="inputqusetion"></div>
           <div class="write">
-          <input type="text" placeholder="..." id="answer_01">
-          <input type="text" placeholder="..." id="answer_02">
-          <input type="text" placeholder="..." id="answer_03">
-          <input type="text" placeholder="..." id="answer_04">
-        </div>
-         <div class="nextAnswer"><p>퀴즈 결과 확인하기</p><img src="./img/icons8-right-arrow-60.png" alt="" onclick="location.href='./result.html'"></div> 
-         
-        </div>
+          <div class="answer" type="text" placeholder="..." id="answer_01"></div>
+          <div class="answer" type="text" placeholder="..." id="answer_02"></div>
+          <div class="answer" type="text" placeholder="..." id="answer_03"></div>
+          <div class="answer" type="text" placeholder="..." id="answer_04"></div>
+          </div>
+         <div class="nextAnswer"><p>퀴즈 결과 확인하기</p><img src="./img/icons8-right-arrow-60.png" alt="" ></div> 
+         <div class="message"></div>
+
+      </div>
       </div>
     </main>
-    <footer>Info</footer>s
+    <footer>Info</footer>
+    <script>
+      let quize_arr = [];
+
+async function loadData() {
+  try {
+    const response = await fetch("/make a quize/data.json/data.json");
+    const data = await response.json();
+    quize_arr = data;
+    console.log(quize_arr);
+    const savedUsername = localStorage.getItem("username");
+    if (savedUsername) {
+      quize_arr[10].username = savedUsername; // quize_arr 배열에 저장
+    }
+    for (let i = 0; i < 9; i++) {
+const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
+if (correctAnswer) {
+  quize_arr[i].correct = correctAnswer;
+}
+}
+const customQuestion = localStorage.getItem("customquestion");
+const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
+const correct = localStorage.getItem("correct");
+const numCorrect = localStorage.getItem("numCorrect");
+console.log(numCorrect);
+if (customQuestion) quize_arr[9].customquestion = customQuestion;
+if (customAnswers) quize_arr[9].customAnswers = customAnswers;
+if (correct) quize_arr[9].correct = correct;
+
+
+
+const customTitle = document.querySelector(".inputqusetion");
+customTitle.textContent = customQuestion;
+
+const correctAnswer = document.querySelectorAll(".answer");
+correctAnswer.forEach((answerElement, index) => {
+  answerElement.textContent = customAnswers[index];
+});
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const lastAnswers = document.querySelectorAll(".answer")
+lastAnswers.forEach(lastAnswer => {
+  lastAnswer.addEventListener("click", function() {
+      // 배경 초기화 
+      lastAnswers.forEach(elem => {
+      elem.style.backgroundColor = "";
+    });
+    this.style.backgroundColor = "orange";
+  });
+});
+
+
+let lastcorrect = 0;
+
+const nextAnswerButton = document.querySelector(".nextAnswer");
+nextAnswerButton.addEventListener("click", function() {
+  const selectedAnswer = document.querySelector(".answer[style='background-color: orange;']");
+  if (selectedAnswer && selectedAnswer.textContent === quize_arr[9].correct) {
+    lastcorrect++;
+    localStorage.setItem("lastcorrect", lastcorrect);
+  }else {
+    lastcorrect = 0; // 틀린 답을 입력하면 0으로 초기화
+    localStorage.setItem("lastcorrect", lastcorrect);
+  }
+  const message = document.querySelector(".message");
+  message.textContent = "📝체점 중입니다...";
+  setTimeout(() => {
+    window.location.href = "result.html";
+  }, 3000);
+});
+
+
+loadData();
+    </script>
 </body>
 </html>
