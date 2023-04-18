@@ -1,81 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/inputUsername.css" />
-</head>
-<body>
-    <header><a href="./main.html"><div class="logo">문 퀴즈~</div></a>
+  </head>
+  <body>
+    <header>
+      <a href="./main.html"><div class="logo">문 퀴즈~</div></a>
     </header>
     <main>
       <div class="container">
         <div class="titlewrap">
-          
           <div class="user_img">
-            <img src="./img/character.jpg" alt="">
+            <img src="./img/character.jpg" alt="" />
           </div>
           <p>당신의 이름을 입력해주세요(ex:문상훈)</p>
-          <input type="text" name="" id="inputname" placeholder="👉이름을 입력해주세요.">
-          <button class="nextpage" onclick="location.href='writeAnswer.html'">확인</button>
-          
+          <input type="text"name=""id="inputname" placeholder="👉이름을 입력해주세요." maxlength="6">
+          <button class="nextpage">확인</button>
         </div>
       </div>
     </main>
     <footer>Info</footer>
 
-    <script> 
-   let quize_arr = [];
+    <script>
+      let quize_arr = [];
 
-async function loadData() {
-  try {
-    const response = await fetch("./data.json/data.json");
-    const data = await response.json();
-    quize_arr = data;
+      async function loadData() {
+        try {
+          const response = await fetch("./data.json/data.json");
+          const data = await response.json();
+          quize_arr = data; 
+          console.log(quize_arr);
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
 
-    const savedUsername = localStorage.getItem("username");
-    if (savedUsername) {
-      quize_arr[10].username = savedUsername;
-    }
+      // 사용자 이름을 quize_arr 배열과 localStorage에 저장하는 함수를 생성
+      function saveUsername() {
+        const username = document.getElementById("inputname").value; // 입력 필드에서 값을 가져옵니다
+        quize_arr[10].username = username; // 배열의 10번 인덱스에 값을 저장합니다
+        localStorage.setItem("username", username); // localStorage에 값을 저장합니다
+      }
+      
+      //input 필드에 기본값으로 설정     
+        document.getElementById("inputname").value = "";    
+      // 버튼에 클릭 이벤트 리스너를 추가하여 사용자 이름을 저장하고 localStorage를 업데이트합니다
+      const button = document.querySelector(".nextpage");
+      button.addEventListener("click", function () {
+        const name = inputname.value;
+        if (name === "") {
+          alert("이름을 입력해주세요");
+        } else {
+          saveUsername();
+          console.log(`입력된 이름: ${name}`);
+          console.log(quize_arr);
+          document.location.href = "writeAnswer.html";
+        }
+      });
 
-    console.log(quize_arr);
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  } 
-}
-
-// 사용자 이름을 quize_arr 배열과 localStorage에 저장하는 함수를 생성
-function saveUsername() {
-  const username = document.getElementById("inputname").value; // 입력 필드에서 값을 가져옵니다
-  quize_arr[10].username = username; // 배열의 10번 인덱스에 값을 저장합니다
-  localStorage.setItem("username", username); // localStorage에 값을 저장합니다
-}
-
-// localStorage에서 저장된 사용자 이름을 불러와 input 필드에 기본값으로 설정
-const savedUsername = localStorage.getItem("username");
-if (savedUsername) {
-  document.getElementById("inputname").value = "";
-}
-
-// 버튼에 클릭 이벤트 리스너를 추가하여 사용자 이름을 저장하고 localStorage를 업데이트합니다
-const button = document.querySelector(".nextpage");
-button.addEventListener("click", function() {
-  const name = inputname.value;
-  if (name === "") {
-    console.log("이름을 입력해주세요");
-  } else {
-    saveUsername();
-    console.log(`입력된 이름: ${name}`);
-    console.log(quize_arr);
-  }
-});
-
-loadData();
-
-
-      </script>
-</body>
+      loadData();
+    </script>
+  </body>
 </html>

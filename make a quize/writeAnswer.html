@@ -39,10 +39,10 @@ async function loadData() {
     const data = await response.json();
     quize_arr = data;
     console.log(quize_arr);
-    const savedUsername = localStorage.getItem("username");
-    if (savedUsername) {
-      quize_arr[10].username = savedUsername; // quize_arr 배열에 저장
-    }
+    // const savedUsername = localStorage.getItem("username"); //localStorage에 저장된 username을 getItem으로 불러옴
+    // if (savedUsername) {
+    //   quize_arr[10].username = savedUsername; // quize_arr 배열에 저장
+    // }
     document.getElementById("questionTitle").innerHTML = quize_arr[0].question;
     document.getElementById("answer_01").innerHTML = quize_arr[0].answers.a;
     document.getElementById("answer_02").innerHTML = quize_arr[0].answers.b;
@@ -52,6 +52,7 @@ async function loadData() {
     console.log(error);
   }
 }
+//answer 버튼 클릭 시 배경 노란색으로 변경
 const answerButtons = document.querySelectorAll('.answer');
 answerButtons.forEach((button) => {
   button.addEventListener('click', function() {
@@ -61,20 +62,17 @@ answerButtons.forEach((button) => {
     });
     
     // 선택한 버튼의 배경 색상을 노란색으로 변경
-    this.style.backgroundColor = 'yellow';
-
-    
-  
-  });
+    this.style.backgroundColor = 'yellow';   
+    });
 });
 
-
-let currentIndex = 0; //currentIndex
+let currentIndex = 0; //currentIndex 초기값 0
 document.querySelector('.nextAnswer').addEventListener('click', function() {
   
-  currentIndex++; 
+  currentIndex++; //클릭 시 currentIndex 1씩 증가
+  console.log(currentIndex);
   if (currentIndex > 8)  {
-    // [8]번째 클릭시 정답으로 버튼의 텍스트 값 저장
+    // [8]번째 클릭시 정답으로 배경이 yellow인 버튼의 텍스트 값 저장
     const answerButtons = document.querySelectorAll('.answer');
     answerButtons.forEach((button) => {
       if (button.style.backgroundColor === 'yellow') {
@@ -82,13 +80,13 @@ document.querySelector('.nextAnswer').addEventListener('click', function() {
         localStorage.setItem((currentIndex -1), quize_arr[8].correct);
       }
     });
-    // customAnswer.html 페이지 이동
+    //quize_arr를 localStorage에 저장 후 customAnswer.html 페이지 이동 
     localStorage.setItem("quize_arr", JSON.stringify(quize_arr));
     document.location.href = 'customAnswer.html';
     return;
   }
 
-  // 클릭시 correct에 버튼의 텍스트 값 저장
+  //  클릭시 정답으로 배경이 yellow인 버튼의 텍스트 값 저장
   const answerButtons = document.querySelectorAll('.answer');
   let selectedButton = null; // 선택된 버튼
   answerButtons.forEach((button) => {
@@ -103,9 +101,7 @@ document.querySelector('.nextAnswer').addEventListener('click', function() {
   if (!selectedButton) { //선택된 버튼이 없으면 경고창 출력 
     alert("정답을 선택해주세요.");
     return;
-  }
-  
-
+  } 
   // 다음 질문을 로드하고 응답 버튼을 재설정
   document.getElementById("questionTitle").innerHTML = quize_arr[currentIndex].question;
   document.getElementById("answer_01").innerHTML = quize_arr[currentIndex].answers.a;
@@ -117,6 +113,7 @@ document.querySelector('.nextAnswer').addEventListener('click', function() {
     button.style.backgroundColor = '';
     button.disabled = false;
   });
+  
 });
 
 

@@ -51,6 +51,7 @@
     font-weight: 900;
     border: none;
     text-align: center;
+    height: 120px;
   }
   
   footer {
@@ -98,7 +99,8 @@
     height: 60px;
     cursor: pointer;
     text-align: center;
-   
+    line-height: 60px;
+    text-overflow: clip;   
   }
   
   .nextAnswer{

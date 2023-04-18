@@ -19,11 +19,24 @@
           </div>
           <p>당신의 이름을 입력해주세요(ex:문상훈)</p>
           <input type="text" name="" id="inputname" placeholder="👉이름을 입력해주세요.">
-          <button class="nextpage" onclick="location.href='./writeAnswer.html'">확인</button>
+          <button class="nextpage" >확인</button>
           
         </div>
       </div>
     </main>
     <footer>Info</footer>
+<script>
+   //이름 입력하여 localStorage에 저장 
+  const button = document.querySelector(".nextpage");
+      button.addEventListener("click", function () {
+        const name = inputname.value;
+        if (name === "") { //공백란일 시 경고창 출력
+          alert("이름을 입력해주세요");
+        } else {//이름 입력 시 guestname이 localStorage에 저장되고 다음 페이지로 이동
+          sessionStorage.setItem("guestname", name); 
+          document.location.href = "writeAnswer.html";
+        }
+      });
+</script>
 </body>
 </html>

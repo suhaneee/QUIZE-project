@@ -49,7 +49,7 @@
         quize_arr[i].correct = correctAnswer;
       }
     }
-const customQuestion = localStorage.getItem("customquestion");
+const customQuestion = localStorage.getItem("customquestion"); //custom 질문 보기 답 불러오기
 const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
 const correct = localStorage.getItem("correct");
 
@@ -57,31 +57,46 @@ if (customQuestion) quize_arr[9].customquestion = customQuestion;
 if (customAnswers) quize_arr[9].customAnswers = customAnswers;
 if (correct) quize_arr[9].correct = correct;
 
-          document.getElementById("questionTitle").innerHTML = quize_arr[0].question;
-          document.getElementById("answer_01").innerHTML = quize_arr[0].answers.a;
-          document.getElementById("answer_02").innerHTML = quize_arr[0].answers.b;
-          document.getElementById("answer_03").innerHTML = quize_arr[0].answers.c;
-          document.getElementById("answer_04").innerHTML = quize_arr[0].answers.d;
-        } catch (error) {
+
+    document.getElementById("questionTitle").innerHTML = quize_arr[0].question;
+    document.getElementById("answer_01").innerHTML = quize_arr[0].answers.a;
+    document.getElementById("answer_02").innerHTML = quize_arr[0].answers.b;
+    document.getElementById("answer_03").innerHTML = quize_arr[0].answers.c;
+    document.getElementById("answer_04").innerHTML = quize_arr[0].answers.d;
+       } catch (error) {
           console.log(error);
         }
       }
 
-let currentIndex = 0; //currentIndex
-const answerElements = document.querySelectorAll(".answer");
 
+const answerElements = document.querySelectorAll(".answer");
+let numCorrect = 0; //초기값 0 설정
+answerElements.forEach(answerElement => {
+  answerElement.addEventListener("click", function() { //answer 클릭 시 배경색이 오렌지색으로 변경
+    // 배경 초기화 
+    answerElements.forEach(elem => {
+      elem.style.backgroundColor = "";
+    });
+    this.style.backgroundColor = "orange";
+  });
+});
+let currentIndex = 0; //currentIndex는 0이 초기값 
 document.querySelector('.nextAnswer').addEventListener('click', function() {
-  const selectedAnswerElement = document.querySelector(".answer[style='background-color: orange;']");
-  const selectedAnswer = selectedAnswerElement ? selectedAnswerElement.textContent : "";
-  if (selectedAnswer === quize_arr[currentIndex].correct) {
-    numCorrect++;
+  const selectedAnswerElement = document.querySelector(".answer[style='background-color: orange;']"); //answer의 배경색이 오렌지인 선택자 
+  if (!selectedAnswerElement) {
+    alert("정답을 👉클릭해주세요.");
+    return;
   }
-  currentIndex++;
+  const selectedAnswer = selectedAnswerElement ? selectedAnswerElement.textContent : ""; // 배경이 오랜지인 요소가 존재하고 콘텐츠가 비어있지 않다
+  if (selectedAnswer === quize_arr[currentIndex].correct) {
+    numCorrect++; //selectedAnswer가 correct값(정답)일 경우 numCorrect 1씩 증가하여 정답률 기록
+  }
+  currentIndex++; //클릭 시 currentIndex1씩 증가
   answerElements.forEach(answerElement => {
     answerElement.style.backgroundColor = ""; // 배경색 초기화
   });
   if (currentIndex > 8) {
-    // customAnswer.html 페이지 이동
+    //9번째 클릭 시 customAnswer.html 페이지 이동 localStorage에 numCorrect 저장
     localStorage.setItem("numCorrect", numCorrect);
     document.location.href = 'customAnswer.html';
   }
@@ -94,16 +109,7 @@ document.querySelector('.nextAnswer').addEventListener('click', function() {
 
  
 });
-let numCorrect = 0;
-answerElements.forEach(answerElement => {
-  answerElement.addEventListener("click", function() {
-    // 배경 초기화 
-    answerElements.forEach(elem => {
-      elem.style.backgroundColor = "";
-    });
-    this.style.backgroundColor = "orange";
-  });
-});
+
 
 
 loadData();

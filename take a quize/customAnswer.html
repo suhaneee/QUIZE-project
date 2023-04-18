@@ -50,22 +50,22 @@ if (correctAnswer) {
   quize_arr[i].correct = correctAnswer;
 }
 }
-const customQuestion = localStorage.getItem("customquestion");
+const customQuestion = localStorage.getItem("customquestion");//custom 질문 보기 정답 값 localStorage에서 가져오기
 const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
 const correct = localStorage.getItem("correct");
-const numCorrect = localStorage.getItem("numCorrect");
-console.log(numCorrect);
+
 if (customQuestion) quize_arr[9].customquestion = customQuestion;
 if (customAnswers) quize_arr[9].customAnswers = customAnswers;
 if (correct) quize_arr[9].correct = correct;
 
-
+const numCorrect = localStorage.getItem("numCorrect");//기존 질문 정답 갯수
+console.log(numCorrect);
 
 const customTitle = document.querySelector(".inputqusetion");
-customTitle.textContent = customQuestion;
+customTitle.textContent = customQuestion;//inputqusetion에 customQuestion입력
 
 const correctAnswer = document.querySelectorAll(".answer");
-correctAnswer.forEach((answerElement, index) => {
+correctAnswer.forEach((answerElement, index) => {//각 answer 버튼에 customAnswers 입력
   answerElement.textContent = customAnswers[index];
 });
 
@@ -73,7 +73,7 @@ correctAnswer.forEach((answerElement, index) => {
     console.log(error);
   }
 }
-
+//answer버튼 클릭 시 orange 배경으로 변경
 const lastAnswers = document.querySelectorAll(".answer")
 lastAnswers.forEach(lastAnswer => {
   lastAnswer.addEventListener("click", function() {
@@ -85,29 +85,34 @@ lastAnswers.forEach(lastAnswer => {
   });
 });
 
-
-let lastcorrect = 0;
-
+let lastcorrect = 0;//lastcorrect 마지막 질문 정답 확인 하기 틀리면 0 맞으면 1 반환 
 const nextAnswerButton = document.querySelector(".nextAnswer");
 nextAnswerButton.addEventListener("click", function() {
   
   const selectedAnswer = document.querySelector(".answer[style='background-color: orange;']");
-  if (selectedAnswer && selectedAnswer.textContent === quize_arr[9].correct) {
+  if (!selectedAnswer) {
+    alert("정답을 👉클릭해주세요.");
+    return;
+  }
+  if (selectedAnswer && selectedAnswer.textContent === quize_arr[9].correct) { //정답과 현재 selectedAnswer의 텍스트가 같다면 +1
     lastcorrect++;
     localStorage.setItem("lastcorrect", lastcorrect);
   }else {
     lastcorrect = 0; // 틀린 답을 입력하면 0으로 초기화
     localStorage.setItem("lastcorrect", lastcorrect);
   }
+  //체점중 메세지 3초간 출력 후 다음 결과 페이지로 전환
   const message = document.querySelector(".message");
   message.style.display = "block";
-  message.textContent = "📝체점 중입니다.....잠시만 기다려주세요";
+  message.textContent = "📝채점 중입니다.....잠시만 기다려주세요";
   setTimeout(() => {
     window.location.href = "result.html";
   }, 3000);
 });
 
 loadData();
+
+
     </script>
 </body>
 </html>

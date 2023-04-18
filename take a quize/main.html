@@ -46,7 +46,7 @@ async function loadData() {
         quize_arr[i].correct = correctAnswer;
       }
     }
-    const customQuestion = localStorage.getItem("customquestion");
+    const customQuestion = localStorage.getItem("customquestion");//custom 질문 가져오기 
 const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
 const correct = localStorage.getItem("correct");
 
@@ -62,7 +62,7 @@ if (correct) quize_arr[9].correct = correct;
   } 
 }
 loadData();
-
+//username에 입력 받았던 값 출력
 const usernames = document.querySelectorAll(".username");
 const savedUsername = localStorage.getItem("username");
 usernames.forEach(username => {

@@ -1,76 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./css/result.css">
-</head>
-<body>
-    <header><a href="./main.html"><div class="logo">문 퀴즈~</div></a>
+    <link rel="stylesheet" href="./css/result.css" />
+  </head>
+  <body>
+    <header>
+      <a href="./main.html"><div class="logo">문 퀴즈~</div></a>
     </header>
     <main>
       <div class="container">
         <div class="titlewrap">
-          
           <div class="user_img">
-            <img src="./img/character.jpg" alt="">
+            <img src="./img/character.jpg" alt="" />
           </div>
-          <p>당신과&nbsp;<span class="username"></span>(이)의 친밀도는 ? <br> <span class="result"></span><br> <small> 친구들에게 공유해보세요</small></p>
-          
-          <input type="text" name="" id="inputname" placeholder="👉링크 복사하기">
-         
-          
+          <p>
+            <span class="guestname"></span>(와)과&nbsp;<span
+              class="username"
+            ></span
+            >(이)의 친밀도는 ? <br />
+            <span class="result"></span><br /><span class="coment"></span>
+            <br />
+            <small> 친구들에게 공유해보세요</small>
+          </p>
+
+          <div id="retry" onclick="location.href='writeAnswer.html'">
+            👉문제 다시 풀기
+          </div>
+          <div class="answerCheck">정답확인하기</div>
+          <div class="popup">
+            <div class="close">x</div>            
+              <h1>정답</h1>
+              <ul class="correctlist"></ul>            
+          </div>
         </div>
       </div>
     </main>
     <footer>Info</footer>
     <script>
-       let quize_arr = [];
+      let quize_arr = [];
 
-async function loadData() {
-  try {
-    const response = await fetch("/make a quize/data.json/data.json");
-    const data = await response.json();
-    quize_arr = data;
+      async function loadData() {
+        try {
+          const response = await fetch("/make a quize/data.json/data.json");
+          const data = await response.json();
+          quize_arr = data;
+          const savedGuestname = sessionStorage.getItem("gusetname");
+          const savedUsername = localStorage.getItem("username");
+          if (savedUsername) {
+            quize_arr[10].username = savedUsername;
+          }
+          for (let i = 0; i < 9; i++) {
+            const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
+            if (correctAnswer) {
+              quize_arr[i].correct = correctAnswer;
+            }
+          }
+          const customQuestion = localStorage.getItem("customquestion");
+          const customAnswers = JSON.parse(
+            localStorage.getItem("customAnswers")
+          );
+          const correct = localStorage.getItem("correct");
 
-    const savedUsername = localStorage.getItem("username");
-    if (savedUsername) {
-      quize_arr[10].username = savedUsername;
-    }
-    for (let i = 0; i < 9; i++) {
-const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
-if (correctAnswer) {
-  quize_arr[i].correct = correctAnswer;
-}
-}
-const customQuestion = localStorage.getItem("customquestion");
-const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
-const correct = localStorage.getItem("correct");
-const numCorrect = localStorage.getItem("numCorrect");
-const lastcorrect = localStorage.getItem("lastcorrect");
-console.log(numCorrect);
-console.log(lastcorrect);
-if (customQuestion) quize_arr[9].customquestion = customQuestion;
-if (customAnswers) quize_arr[9].customAnswers = customAnswers;
-if (correct) quize_arr[9].correct = correct;
+          if (customQuestion) quize_arr[9].customquestion = customQuestion;
+          if (customAnswers) quize_arr[9].customAnswers = customAnswers;
+          if (correct) quize_arr[9].correct = correct;
+          //정답률 불러오기
+          const numCorrect = localStorage.getItem("numCorrect");
+          const lastcorrect = localStorage.getItem("lastcorrect");
+          console.log(numCorrect);
+          console.log(lastcorrect);
 
-const result = document.querySelector(".result")
-result.innerHTML = parseInt(numCorrect) + parseInt(lastcorrect) +"0%❤️";
-    console.log(quize_arr);
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  } 
-}
-loadData();
+          //결과 %로 나타내고 각 %결과에 따라 코멘트 달기
+          const result = document.querySelector(".result");
+          result.innerHTML =
+            parseInt(numCorrect) + parseInt(lastcorrect) + "0% "; //기존 질문과 커스텀 질문의 합하여 반환
+          let comment = "";
+          const score = parseInt(numCorrect) + parseInt(lastcorrect);
+          if (score >= 0 && score <= 2) {
+            //0~2일때
+            comment = " 너 나 알아?";
+          } else if (score >= 3 && score <= 5) {
+            //3~5일때
+            comment = "우린 겉친인가봐...";
+          } else if (score >= 6 && score <= 8) {
+            //6~8일때
+            comment = "❤️좀 더 친해지자";
+          } else if (score === 9) {
+            comment = "❤️우리 우정 변치말자❤️";
+          } else if (score === 10) {
+            comment = "❤️우린 찐친 말해뭐해❤️";
+          }
+          document.querySelector(".coment").textContent = comment;
 
-const usernames = document.querySelectorAll(".username");
-const savedUsername = localStorage.getItem("username");
-usernames.forEach(username => {
-  username.textContent = savedUsername;
-});
+          // Get the correctlist element
+          const correctList = document.querySelector(".correctlist");
+
+          // Loop through the quiz array and create a list item for each question
+          for (let i = 0; i < quize_arr.length -1; i++) {
+            // Create a new list item element
+            const li = document.createElement("li");      
+            // Create a text node with the correct answer
+            const correctAnswerText = document.createTextNode(
+              `${quize_arr[i].correct}`
+            );
+            // Append the text nodes to the list item
+            li.appendChild(correctAnswerText);
+            li.appendChild(document.createElement("br"));
+            // Append the list item to the correctlist element
+            correctList.appendChild(li);
+          }
+          console.log(quize_arr);
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      loadData();
+
+      const savedGuestname = sessionStorage.getItem("guestname");
+      const guestname = document.querySelector(".guestname");
+      guestname.textContent = savedGuestname;
+
+      const usernames = document.querySelectorAll(".username");
+      const savedUsername = localStorage.getItem("username");
+      usernames.forEach((username) => {
+        username.textContent = savedUsername;
+      });
+
+      const answerCheck = document.querySelector(".answerCheck");
+      const popup = document.querySelector(".popup");
+      const close = document.querySelector(".close");
+
+      answerCheck.addEventListener("click", () => {
+        popup.style.display = "block";
+      });
+
+      close.addEventListener("click", () => {
+        popup.style.display = "none";
+      });
     </script>
-</body>
+  </body>
 </html>
