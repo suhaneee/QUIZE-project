@@ -59,8 +59,6 @@ if (customQuestion) quize_arr[9].customquestion = customQuestion;
 if (customAnswers) quize_arr[9].customAnswers = customAnswers;
 if (correct) quize_arr[9].correct = correct;
 
-
-
 const customTitle = document.querySelector(".inputqusetion");
 customTitle.textContent = customQuestion;
 
@@ -85,13 +83,16 @@ lastAnswers.forEach(lastAnswer => {
   });
 });
 
-
 let lastcorrect = 0;
 
 const nextAnswerButton = document.querySelector(".nextAnswer");
 nextAnswerButton.addEventListener("click", function() {
   
   const selectedAnswer = document.querySelector(".answer[style='background-color: orange;']");
+  if (!selectedAnswer) {
+    alert("정답을 👉클릭해주세요.");
+    return;
+  }
   if (selectedAnswer && selectedAnswer.textContent === quize_arr[9].correct) {
     lastcorrect++;
     localStorage.setItem("lastcorrect", lastcorrect);
@@ -101,7 +102,7 @@ nextAnswerButton.addEventListener("click", function() {
   }
   const message = document.querySelector(".message");
   message.style.display = "block";
-  message.textContent = "📝체점 중입니다.....잠시만 기다려주세요";
+  message.textContent = "📝채점 중입니다.....잠시만 기다려주세요";
   setTimeout(() => {
     window.location.href = "result.html";
   }, 3000);

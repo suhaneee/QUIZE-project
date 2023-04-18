@@ -58,7 +58,7 @@ async function loadData() {
     console.log(error);
   } 
 }
-//inputqusetion 입력된 값 customquestion에 저장 
+//inputqusetion에 입력된 값을 json 데이터 customquestion에 저장 
 const inputField = document.querySelector(".inputqusetion");
 inputField.addEventListener("change", function () {
   const title = inputField.value;
@@ -77,7 +77,7 @@ answerFields.forEach((field, i) => {
 
 answerFields.forEach((button) => {
   button.addEventListener("dblclick", (event) => { //더블 클릭 시 버튼의 배경 노란색으로 변경 
-    const clickedButton = event.target;
+    const clickedButton = event.target; //더블 클릭된 이벤트 객체 
     answerFields.forEach((button) => {//다른 버튼 클릭 시 노란색 해제 
       button.style.backgroundColor = "";
       button.style.color = "";
@@ -88,22 +88,21 @@ answerFields.forEach((button) => {
 });
 
 const nextAnswerButton = document.querySelector(".nextAnswer");
-
 nextAnswerButton.addEventListener("click", () => {
-  let selectedAnswer = "";
+  let selectedAnswer = ""; //초기값 빈문자열 
   answerFields.forEach((field) => {
     if (field.style.backgroundColor === "yellow") {
-      selectedAnswer = field.value;
+      selectedAnswer = field.value;//value 값을 selectedAnswer 변수에 할당
     }
   });
 
-  if (selectedAnswer !== "") {
-    quize_arr[9].correct = selectedAnswer;
+  if (selectedAnswer !== "") { //정답을 입력했을 경우
+    quize_arr[9].correct = selectedAnswer;//quize_arr[9] 객체의 correct 속성에 할당
     localStorage.setItem("correct", selectedAnswer);
     localStorage.setItem("customquestion", quize_arr[9].customquestion);
-    localStorage.setItem("customAnswers", JSON.stringify(quize_arr[9].customAnswers));
-    window.location.href = "createqusetion.html";
-  } else {
+    localStorage.setItem("customAnswers", JSON.stringify(quize_arr[9].customAnswers));// 로컬 스토리지에 JSON 문자열로 저장
+    window.location.href = "createqusetion.html";//지정 페이지로 이동
+  } else {//빈문자열일 경우 경고창 출력
     alert("정답을 입력해주세요.");
   }
 

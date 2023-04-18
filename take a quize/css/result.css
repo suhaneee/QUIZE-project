@@ -41,7 +41,7 @@ main{
 }
 .container p{
     position: absolute;
-    top: 35%;
+    top: 31%;
     left: 50%;
     translate: -50%;
     width: 100%;
@@ -75,18 +75,18 @@ footer{
     
     
 }
-#inputname{
+#retry{
     position: absolute;
     width: 350px;
     height: 70px;
     background-color: rgb(3, 103, 218);
     border-radius: 10px;
     cursor: pointer;
-    
+    line-height: 65px;
     color: #fff;
     text-align: center;
     font-size: 30px;
-    bottom: 220px;
+    bottom: 200px;
     right: 250px;
 }
 #inputname::placeholder {
@@ -107,4 +107,7 @@ footer{
 }
 a{
     text-decoration-line:none ;
+}
+.coment{
+    font-size: 35px;
 }
