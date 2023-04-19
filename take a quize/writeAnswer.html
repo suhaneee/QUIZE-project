@@ -70,9 +70,15 @@ if (correct) quize_arr[9].correct = correct;
 
 
 const answerElements = document.querySelectorAll(".answer");
+<<<<<<< HEAD
 let numCorrect = 0; //초기값 0 설정
 answerElements.forEach(answerElement => {
   answerElement.addEventListener("click", function() { //answer 클릭 시 배경색이 오렌지색으로 변경
+=======
+let numCorrect = 0;
+answerElements.forEach(answerElement => {
+  answerElement.addEventListener("click", function() {
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
     // 배경 초기화 
     answerElements.forEach(elem => {
       elem.style.backgroundColor = "";
@@ -80,12 +86,25 @@ answerElements.forEach(answerElement => {
     this.style.backgroundColor = "orange";
   });
 });
+<<<<<<< HEAD
 let currentIndex = 0; //currentIndex는 0이 초기값 
 document.querySelector('.nextAnswer').addEventListener('click', function() {
   const selectedAnswerElement = document.querySelector(".answer[style='background-color: orange;']"); //answer의 배경색이 오렌지인 선택자 
   if (!selectedAnswerElement) {
     alert("정답을 👉클릭해주세요.");
     return;
+=======
+let currentIndex = 0; //currentIndex
+document.querySelector('.nextAnswer').addEventListener('click', function() {
+  const selectedAnswerElement = document.querySelector(".answer[style='background-color: orange;']");
+  if (!selectedAnswerElement) {
+    alert("정답을 👉클릭해주세요.");
+    return;
+  }
+  const selectedAnswer = selectedAnswerElement ? selectedAnswerElement.textContent : "";
+  if (selectedAnswer === quize_arr[currentIndex].correct) {
+    numCorrect++;
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
   }
   const selectedAnswer = selectedAnswerElement ? selectedAnswerElement.textContent : ""; // 배경이 오랜지인 요소가 존재하고 콘텐츠가 비어있지 않다
   if (selectedAnswer === quize_arr[currentIndex].correct) {

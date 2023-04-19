@@ -58,9 +58,12 @@ if (customQuestion) quize_arr[9].customquestion = customQuestion;
 if (customAnswers) quize_arr[9].customAnswers = customAnswers;
 if (correct) quize_arr[9].correct = correct;
 
+<<<<<<< HEAD
 const numCorrect = localStorage.getItem("numCorrect");//기존 질문 정답 갯수
 console.log(numCorrect);
 
+=======
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
 const customTitle = document.querySelector(".inputqusetion");
 customTitle.textContent = customQuestion;//inputqusetion에 customQuestion입력
 
@@ -85,7 +88,12 @@ lastAnswers.forEach(lastAnswer => {
   });
 });
 
+<<<<<<< HEAD
 let lastcorrect = 0;//lastcorrect 마지막 질문 정답 확인 하기 틀리면 0 맞으면 1 반환 
+=======
+let lastcorrect = 0;
+
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
 const nextAnswerButton = document.querySelector(".nextAnswer");
 nextAnswerButton.addEventListener("click", function() {
   
@@ -94,7 +102,11 @@ nextAnswerButton.addEventListener("click", function() {
     alert("정답을 👉클릭해주세요.");
     return;
   }
+<<<<<<< HEAD
   if (selectedAnswer && selectedAnswer.textContent === quize_arr[9].correct) { //정답과 현재 selectedAnswer의 텍스트가 같다면 +1
+=======
+  if (selectedAnswer && selectedAnswer.textContent === quize_arr[9].correct) {
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
     lastcorrect++;
     localStorage.setItem("lastcorrect", lastcorrect);
   }else {

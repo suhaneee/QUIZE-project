@@ -36,6 +36,14 @@
               <h1>정답</h1>
               <ul class="correctlist"></ul>            
           </div>
+<<<<<<< HEAD
+=======
+          <p><span class="guestname"></span>(와)과&nbsp;<span class="username"></span>(이)의 친밀도는 ? <br> <span class="result"></span><br><span class="coment"></span> <br> <small> 친구들에게 공유해보세요</small></p>
+          
+          <div id="retry" onclick="location.href='writeAnswer.html'">👉문제 다시 풀기</div>
+         
+          
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
         </div>
       </div>
     </main>
@@ -43,6 +51,7 @@
     <script>
       let quize_arr = [];
 
+<<<<<<< HEAD
       async function loadData() {
         try {
           const response = await fetch("/make a quize/data.json/data.json");
@@ -143,6 +152,71 @@
       close.addEventListener("click", () => {
         popup.style.display = "none";
       });
+=======
+async function loadData() {
+  try {
+    const response = await fetch("/make a quize/data.json/data.json");
+    const data = await response.json();
+    quize_arr = data;
+    const savedGuestname = localStorage.getItem("gusetname");
+    const savedUsername = localStorage.getItem("username");
+    if (savedUsername) {
+      quize_arr[10].username = savedUsername;
+    }
+    for (let i = 0; i < 9; i++) {
+const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
+if (correctAnswer) {
+  quize_arr[i].correct = correctAnswer;
+}
+}
+const customQuestion = localStorage.getItem("customquestion");
+const customAnswers = JSON.parse(localStorage.getItem("customAnswers"));
+const correct = localStorage.getItem("correct");
+const numCorrect = localStorage.getItem("numCorrect");
+const lastcorrect = localStorage.getItem("lastcorrect");
+console.log(numCorrect);
+console.log(lastcorrect);
+if (customQuestion) quize_arr[9].customquestion = customQuestion;
+if (customAnswers) quize_arr[9].customAnswers = customAnswers;
+if (correct) quize_arr[9].correct = correct;
+
+//결과 %로 나타내고 각 %결과에 따라 코멘트 달기 
+const result = document.querySelector(".result")
+result.innerHTML = parseInt(numCorrect) + parseInt(lastcorrect) +"0% ";
+let comment = "";
+const score = parseInt(numCorrect) + parseInt(lastcorrect);
+if (score >= 0 && score <= 2) {
+  comment = " 너 나 알아?";
+} else if (score >= 3 && score <= 5) {
+  comment = "우린 겉친인가봐...";
+} else if (score >= 6 && score <= 8) {
+  comment = "❤️좀 더 친해지자";
+} else if (score === 9) {
+  comment = "❤️우리 우정 변치말자❤️";
+} else if (score === 10) {
+  comment = "❤️우린 찐친 말해뭐해❤️";
+}
+
+document.querySelector(".coment").textContent = comment;
+    console.log(quize_arr);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  } 
+}
+
+loadData();
+
+const savedGuestname = localStorage.getItem("guestname");
+const guestname = document.querySelector(".guestname");
+guestname.textContent =savedGuestname;
+
+const usernames = document.querySelectorAll(".username");
+const savedUsername = localStorage.getItem("username");
+usernames.forEach(username => {
+  username.textContent = savedUsername;
+});
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
     </script>
   </body>
 </html>

@@ -33,7 +33,11 @@
         if (name === "") { //공백란일 시 경고창 출력
           alert("이름을 입력해주세요");
         } else {//이름 입력 시 guestname이 localStorage에 저장되고 다음 페이지로 이동
+<<<<<<< HEAD
           sessionStorage.setItem("guestname", name); 
+=======
+          localStorage.setItem("guestname", name); 
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
           document.location.href = "writeAnswer.html";
         }
       });

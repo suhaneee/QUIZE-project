@@ -58,7 +58,10 @@ async function loadData() {
     console.log(error);
   } 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
 //inputqusetion에 입력된 값을 json 데이터 customquestion에 저장 
 const inputField = document.querySelector(".inputqusetion");
 inputField.addEventListener("change", function () {
@@ -93,22 +96,35 @@ answerFields.forEach((button) => {
 const nextAnswerButton = document.querySelector(".nextAnswer");
 nextAnswerButton.addEventListener("click", () => {
   let selectedAnswer = ""; //초기값 빈문자열 
+<<<<<<< HEAD
   let isCustomAnswersEmpty = false;
   answerFields.forEach((field) => {
     if (field.style.backgroundColor === "yellow") {
       selectedAnswer = field.value;//value 값을 selectedAnswer 변수에 할당         
+=======
+  answerFields.forEach((field) => {
+    if (field.style.backgroundColor === "yellow") {
+      selectedAnswer = field.value;//value 값을 selectedAnswer 변수에 할당
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
     }
     
   });
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
   if (selectedAnswer !== "") { //정답을 입력했을 경우
     quize_arr[9].correct = selectedAnswer;//quize_arr[9] 객체의 correct 속성에 할당
     localStorage.setItem("correct", selectedAnswer);
     localStorage.setItem("customquestion", quize_arr[9].customquestion);
     localStorage.setItem("customAnswers", JSON.stringify(quize_arr[9].customAnswers));// 로컬 스토리지에 JSON 문자열로 저장
     window.location.href = "createqusetion.html";//지정 페이지로 이동
+<<<<<<< HEAD
   } else if (quize_arr[9].customquestion === "") { //If the question field is empty
     alert("질문을 입력해주세요");
+=======
+>>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
   } else {//빈문자열일 경우 경고창 출력
     alert("정답을 입력해주세요.");
   }
