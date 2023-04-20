@@ -46,12 +46,15 @@
     left: 52%;
     translate: -50%;
     width: 90%;
+    overflow-y: auto;
+    max-height: 120px; /* 스크롤이 표시될 최대 높이 */
     color: black;
     font-size: 40px;
     font-weight: 900;
     border: none;
     text-align: center;
-    height: 120px;
+
+    
   }
   
   footer {

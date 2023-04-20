@@ -41,7 +41,6 @@ main {
 .titlewrap {
   padding-top: 30px;
 }
-<<<<<<< HEAD
 .container p {
   position: absolute;
   top: 31%;
@@ -51,17 +50,6 @@ main {
   color: black;
   font-size: 40px;
   font-weight: 100;
-=======
-.container p{
-    position: absolute;
-    top: 31%;
-    left: 50%;
-    translate: -50%;
-    width: 100%;
-    color: black;
-    font-size: 40px;
-    font-weight: 100;
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
 }
 
 footer {
@@ -86,7 +74,6 @@ footer {
   height: 220px;
   border-radius: 50%;
 }
-<<<<<<< HEAD
 #retry {
   position: absolute;
   width: 350px;
@@ -100,21 +87,6 @@ footer {
   font-size: 30px;
   bottom: 200px;
   right: 250px;
-=======
-#retry{
-    position: absolute;
-    width: 350px;
-    height: 70px;
-    background-color: rgb(3, 103, 218);
-    border-radius: 10px;
-    cursor: pointer;
-    line-height: 65px;
-    color: #fff;
-    text-align: center;
-    font-size: 30px;
-    bottom: 200px;
-    right: 250px;
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
 }
 #inputname::placeholder {
   color: #f1f1f1;
@@ -160,7 +132,6 @@ a {
     background-color: white;
     border: 8px solid black;
     border-radius: 10px;
-<<<<<<< HEAD
   }
   .close{
     position: absolute;
@@ -185,16 +156,3 @@ text-align: left;
   
    
 }
-=======
-    bottom: 160px;
-    right: 250px;
-    font-size: 30px;
-    color: #fff;
-}
-a{
-    text-decoration-line:none ;
-}
-.coment{
-    font-size: 35px;
-}
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62

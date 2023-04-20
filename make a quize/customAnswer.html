@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./css/customAnwer.css">
-
-</head>
-<body>
-    <header><a href="./main.html"><div class="logo">문 퀴즈~</div></a>
+    <link rel="stylesheet" href="./css/customAnwer.css" />
+  </head>
+  <body>
+    <header>
+      <a href="./main.html"><div class="logo">문 퀴즈~</div></a>
     </header>
     <main>
       <div class="container">
         <div class="titlewrap">
-          
           <div class="user_img">
-            <img src="./img/character.jpg" alt="">
+            <img src="./img/character.jpg" alt="" />
           </div>
-          <input class="inputqusetion" type="text" placeholder="나만의 질문 만들기!   👈 입력">
+          <input
+            class="inputqusetion"
+            type="text"
+            placeholder="나만의 질문 만들기!   👈 입력"
+          />
           <div class="write">
-          <input class="inputanswer" placeholder="..." id="answer_01" maxlength='17'>
-          <input class="inputanswer" placeholder="..." id="answer_02" maxlength='17'>
-          <input class="inputanswer" placeholder="..." id="answer_03" maxlength='17'>
-          <input class="inputanswer" placeholder="..." id="answer_04" maxlength='17'>
-          <h4>질문과 보기를 작성하고 더블 클릭하여 정답을 정해주세요</h4>
-        </div>
-       
-        
-         <div class="nextAnswer"><p>퀴즈 생성하러 가기</p><img src="./img/icons8-right-arrow-60.png" alt="" ></div>  
+            <input
+              class="inputanswer"
+              placeholder="..."
+              id="answer_01"
+              maxlength="17"
+            />
+            <input
+              class="inputanswer"
+              placeholder="..."
+              id="answer_02"
+              maxlength="17"
+            />
+            <input
+              class="inputanswer"
+              placeholder="..."
+              id="answer_03"
+              maxlength="17"
+            />
+            <input
+              class="inputanswer"
+              placeholder="..."
+              id="answer_04"
+              maxlength="17"
+            />
+            <h4>질문과 보기를 작성하고 더블 클릭하여 정답을 정해주세요</h4>
+          </div>
+
+          <div class="nextAnswer">
+            <p>퀴즈 생성하러 가기</p>
+            <img src="./img/icons8-right-arrow-60.png" alt="" />
+          </div>
         </div>
       </div>
     </main>
@@ -36,104 +61,100 @@
     <script>
       let quize_arr = [];
 
-async function loadData() {
-  try {
-    const response = await fetch("./data.json/data.json");
-    const data = await response.json();
-    quize_arr = data;
+      async function loadData() {
+        try {
+          const response = await fetch("./data.json/data.json");
+          const data = await response.json();
+          quize_arr = data;
 
-    // const savedUsername = localStorage.getItem("username");//username 값 localStorage에서 가져오기
-    // if (savedUsername) {
-    //   quize_arr[10].username = savedUsername;
-    // }
-    //  for (let i = 0; i < 9; i++) {
-    //   const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
-    //   if (correctAnswer) {
-    //     quize_arr[i].correct = correctAnswer;
-    //   }
-    // }
-    console.log(quize_arr);
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  } 
-}
-<<<<<<< HEAD
+          // const savedUsername = localStorage.getItem("username");//username 값 localStorage에서 가져오기
+          // if (savedUsername) {
+          //   quize_arr[10].username = savedUsername;
+          // }
+          //  for (let i = 0; i < 9; i++) {
+          //   const correctAnswer = localStorage.getItem(i); //correct값 localStorage에서 가져오기
+          //   if (correctAnswer) {
+          //     quize_arr[i].correct = correctAnswer;
+          //   }
+          // }
+          console.log(quize_arr);
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
 
-=======
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
-//inputqusetion에 입력된 값을 json 데이터 customquestion에 저장 
-const inputField = document.querySelector(".inputqusetion");
-inputField.addEventListener("change", function () {
-  const title = inputField.value;
-  quize_arr[9].customquestion = title;
-  localStorage.setItem("customquestion", title);
-});
+      //inputqusetion에 입력된 값을 json 데이터 customquestion에 저장
+      const inputField = document.querySelector(".inputqusetion");
+      inputField.addEventListener("change", function () {
+        const title = inputField.value;
+        quize_arr[9].customquestion = title;
+        localStorage.setItem("customquestion", title);
+      });
 
-//inputanswer에 입력된 값들 각 customAnswers[i]에 저장 
-const answerFields = document.querySelectorAll(".inputanswer");
-answerFields.forEach((field, i) => {
-  field.addEventListener("change", () => {
-    const answer = field.value;
-    console.log(answer)
-    quize_arr[9].customAnswers[i] = answer;
-    localStorage.setItem("customAnswers", JSON.stringify(quize_arr[9].customAnswers));
-  });
-});
+      //inputanswer에 입력된 값들 각 customAnswers[i]에 저장
+      const answerFields = document.querySelectorAll(".inputanswer");
+      answerFields.forEach((field, i) => {
+        field.addEventListener("change", () => {
+          const answer = field.value;
+          console.log(answer);
+          quize_arr[9].customAnswers[i] = answer;
+          localStorage.setItem(
+            "customAnswers",
+            JSON.stringify(quize_arr[9].customAnswers)
+          );
+        });
+      });
 
-answerFields.forEach((button) => {
-  button.addEventListener("dblclick", (event) => { //더블 클릭 시 버튼의 배경 노란색으로 변경 
-    const clickedButton = event.target; //더블 클릭된 이벤트 객체 
-    answerFields.forEach((button) => {//다른 버튼 클릭 시 노란색 해제 
-      button.style.backgroundColor = "";
-      button.style.color = "";
-    });
-    clickedButton.style.backgroundColor = "yellow";
-    clickedButton.style.color = "black";
-  });
-});
+      answerFields.forEach((button) => {
+        button.addEventListener("dblclick", (event) => {
+          //더블 클릭 시 버튼의 배경 노란색으로 변경
+          const clickedButton = event.target; //더블 클릭된 이벤트 객체
+          answerFields.forEach((button) => {
+            //다른 버튼 클릭 시 노란색 해제
+            button.style.backgroundColor = "";
+            button.style.color = "";
+          });
+          clickedButton.style.backgroundColor = "yellow";
+          clickedButton.style.color = "black";
+        });
+      });
 
-const nextAnswerButton = document.querySelector(".nextAnswer");
+      const nextAnswerButton = document.querySelector(".nextAnswer");
 nextAnswerButton.addEventListener("click", () => {
-  let selectedAnswer = ""; //초기값 빈문자열 
-<<<<<<< HEAD
+  let selectedAnswer = "";
   let isCustomAnswersEmpty = false;
-  answerFields.forEach((field) => {
-    if (field.style.backgroundColor === "yellow") {
-      selectedAnswer = field.value;//value 값을 selectedAnswer 변수에 할당         
-=======
-  answerFields.forEach((field) => {
-    if (field.style.backgroundColor === "yellow") {
-      selectedAnswer = field.value;//value 값을 selectedAnswer 변수에 할당
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
-    }
-    
-  });
-<<<<<<< HEAD
- 
-=======
 
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
-  if (selectedAnswer !== "") { //정답을 입력했을 경우
-    quize_arr[9].correct = selectedAnswer;//quize_arr[9] 객체의 correct 속성에 할당
+  answerFields.forEach((field) => {
+    if (field.style.backgroundColor === "yellow") {
+      selectedAnswer = field.value;
+    }
+  });
+
+  for (let i = 0; i < quize_arr[9].customAnswers.length; i++) {
+    if (quize_arr[9].customAnswers[i] === "") {
+      isCustomAnswersEmpty = true;
+      break;
+    }
+  }
+
+  if (selectedAnswer !== "") {
+    quize_arr[9].correct = selectedAnswer;
     localStorage.setItem("correct", selectedAnswer);
     localStorage.setItem("customquestion", quize_arr[9].customquestion);
-    localStorage.setItem("customAnswers", JSON.stringify(quize_arr[9].customAnswers));// 로컬 스토리지에 JSON 문자열로 저장
-    window.location.href = "createqusetion.html";//지정 페이지로 이동
-<<<<<<< HEAD
-  } else if (quize_arr[9].customquestion === "") { //If the question field is empty
+    localStorage.setItem("customAnswers", JSON.stringify(quize_arr[9].customAnswers));
+    window.location.href = "createqusetion.html";
+  } else if (quize_arr[9].customquestion === "") {
     alert("질문을 입력해주세요");
-=======
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
-  } else {//빈문자열일 경우 경고창 출력
+  } else if (isCustomAnswersEmpty) {
+    alert("답변을 입력해주세요");
+  } else {
     alert("정답을 입력해주세요.");
   }
-  
-  
 });
 
 
-loadData();
+      loadData();
     </script>
-</body>
+  </body>
 </html>

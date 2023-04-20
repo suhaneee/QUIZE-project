@@ -38,18 +38,12 @@ async function loadData() {
     const response = await fetch("./data.json/data.json");
     const data = await response.json();
     quize_arr = data;
-    console.log(quize_arr);
-<<<<<<< HEAD
-    // const savedUsername = localStorage.getItem("username"); //localStorage에 저장된 username을 getItem으로 불러옴
+    console.log(quize_arr); 
+
+    // const savedUsername = localStorage.getItem("username");  //localStorage에 저장된 username을 getItem으로 불러옴
     // if (savedUsername) {
     //   quize_arr[10].username = savedUsername; // quize_arr 배열에 저장
     // }
-=======
-    const savedUsername = localStorage.getItem("username");  //localStorage에 저장된 username을 getItem으로 불러옴
-    if (savedUsername) {
-      quize_arr[10].username = savedUsername; // quize_arr 배열에 저장
-    }
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
     document.getElementById("questionTitle").innerHTML = quize_arr[0].question;
     document.getElementById("answer_01").innerHTML = quize_arr[0].answers.a;
     document.getElementById("answer_02").innerHTML = quize_arr[0].answers.b;
@@ -72,18 +66,14 @@ answerButtons.forEach((button) => {
     this.style.backgroundColor = 'yellow';   
     });
 });
-<<<<<<< HEAD
 
-=======
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
 let currentIndex = 0; //currentIndex 초기값 0
 document.querySelector('.nextAnswer').addEventListener('click', function() {
   
   currentIndex++; //클릭 시 currentIndex 1씩 증가
-<<<<<<< HEAD
+
   console.log(currentIndex);
-=======
->>>>>>> cfac138e29462dd3be42685e8f2ce97c8518ed62
+
   if (currentIndex > 8)  {
     // [8]번째 클릭시 정답으로 배경이 yellow인 버튼의 텍스트 값 저장
     const answerButtons = document.querySelectorAll('.answer');
@@ -128,9 +118,6 @@ document.querySelector('.nextAnswer').addEventListener('click', function() {
   });
   
 });
-
-
-
 
 loadData(); 
 
